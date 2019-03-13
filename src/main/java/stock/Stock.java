@@ -1,60 +1,63 @@
 package stock;
 
 public class Stock {
-    private final static int MAX_TIME_SLOTS = 421; // Assumption that the market starts trading at 10am and ends at 5pm
-
     private String name;
-    private int[] stockPricesYesterday;
+    private int[] stockPrices;
 
-    public Stock(String name, int[] stockPricesYesterday) {
-        this.name = name;
-        // Validate that the input array is 421 elements
-        this.stockPricesYesterday = stockPricesYesterday;
-    }
-
-    public Stock(String name) {
-        this.name = name;
-        this.stockPricesYesterday = new int[MAX_TIME_SLOTS];
+    public static Stock createStock(String name, int[] stockPrices) {
+        validateStockPrices(stockPrices);
+        return new Stock(name, stockPrices);
     }
 
     public String getName() {
         return name;
     }
 
-    public int[] getStockPricesYesterday() {
-        return stockPricesYesterday;
-    }
-
-    public boolean add(int index, int stockPrice) {
-        if (index >= 0 && index < MAX_TIME_SLOTS) {
-            stockPricesYesterday[index] = stockPrice;
-            return true;
-        }
-        return false;
+    public int[] getStockPrices() {
+        return stockPrices;
     }
 
     public int getMaxProfit() {
-        if (stockPricesYesterday.length == 0) {
+        if (isStockPricesEmpty()) {
             return 0;
         }
 
-        int maxDiff = 0;
-        int localMin = stockPricesYesterday[0];
-        int localMax = localMin;
+        int currentMin = stockPrices[0];
+        int currentMax = currentMin;
+        int maxProfit = 0;
 
-        for (int stockPrice: stockPricesYesterday){
-            if (stockPrice > localMax) {
-                localMax = stockPrice;
-                int localDiff = localMax - localMin;
-                if (localDiff > maxDiff) {
-                    maxDiff = localDiff;
+        for (int currentPrice: stockPrices){
+            if (currentPrice > 0) {
+                if (currentPrice > currentMax) {
+                    currentMax = currentPrice;
+                    int currentProfit = currentMax - currentMin;
+                    if (currentProfit > maxProfit) {
+                        maxProfit = currentProfit;
+                    }
+                } else if (currentPrice < currentMin) {
+                    currentMin = currentPrice;
+                    currentMax = currentMin;
                 }
-            } else if (stockPrice < localMin) {
-                localMin = stockPrice;
-                localMax = localMin;
             }
         }
 
-        return maxDiff;
+        return maxProfit;
+    }
+
+    private Stock(String name, int[] stockPrices) {
+        this.name = name;
+        this.stockPrices = stockPrices;
+    }
+
+    private static void validateStockPrices(int[] stockPrices) {
+        for (int price: stockPrices) {
+            if (price <= 0) {
+                throw new IllegalArgumentException("Stock prices must be greater than 0");
+            }
+        }
+    }
+
+    private boolean isStockPricesEmpty() {
+        return stockPrices.length == 0;
     }
 }
