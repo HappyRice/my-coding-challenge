@@ -6,7 +6,8 @@ public class CodingChallenge {
 
     public static void main(String[] args) {
 
-        int[] prices = {6, 10, 7, 5, 8, 9, 1};
+        int[] prices = {30, 60, 10, 27, 5, 18, 38, 9, 40, 39, 2, 28, 36};
+        // 40 - 5
 
         try {
             Stock myStock = Stock.createStock("My Stock", prices);

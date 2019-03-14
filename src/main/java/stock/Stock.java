@@ -28,7 +28,7 @@ public class Stock {
         int maxProfit = 0;
 
         for (int currentPrice: stockPrices){
-            // If new max is found, reset the current max and calculate the difference
+            // If new current max is found, update the current max and calculate the profit
             if (currentPrice > currentMax) {
                 currentMax = currentPrice;
                 int currentProfit = currentMax - currentMin;
@@ -37,9 +37,10 @@ public class Stock {
                     maxProfit = currentProfit;
                 }
             } else if (currentPrice < currentMin) {
-                // If new min is found, reset both the current min and current max
+                /* Instead of simply resetting the current max, update it by subtracting the difference between the
+                   original min and the new min found from the original max */
+                currentMax -= currentMin - currentPrice;
                 currentMin = currentPrice;
-                currentMax = currentPrice;
             }
         }
 

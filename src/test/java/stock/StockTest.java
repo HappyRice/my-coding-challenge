@@ -11,7 +11,7 @@ public class StockTest {
     public ExpectedException exception = ExpectedException.none();
 
     @Test
-    public void testSinglePrice() {
+    public void testCalculateMaxProfitForSinglePrice() {
         final int[] stockPrices = {10};
         final Stock test = Stock.createStock("Test", stockPrices);
 
@@ -19,7 +19,7 @@ public class StockTest {
     }
 
     @Test
-    public void testDuplicatePrices() {
+    public void testCalculateMaxProfitForDuplicatePrices() {
         final int[] stockPrices = {10, 10, 10, 10, 10};
         final Stock test = Stock.createStock("Test", stockPrices);
 
@@ -27,7 +27,7 @@ public class StockTest {
     }
 
     @Test
-    public void testDecreasingOnlyPrices() {
+    public void testCalculateMaxProfitForDecreasingOnlyPrices() {
         final int[] stockPrices = {10, 8, 7, 5, 3, 1};
         final Stock test = Stock.createStock("Test", stockPrices);
 
@@ -35,7 +35,7 @@ public class StockTest {
     }
 
     @Test
-    public void testIncreasingOnlyPrices() {
+    public void testCalculateMaxProfitForIncreasingOnlyPrices() {
         final int[] stockPrices = {1, 3, 5, 7, 8, 10};
         final Stock test = Stock.createStock("Test", stockPrices);
 
@@ -44,7 +44,7 @@ public class StockTest {
     }
 
     @Test
-    public void testCorrectMaxProfitIsReturned1() {
+    public void testCalculateMaxProfitIsCorrect1() {
         final int[] stockPrices = {10, 7, 5, 8, 9, 15};
         final Stock test = Stock.createStock("Test", stockPrices);
 
@@ -53,7 +53,7 @@ public class StockTest {
     }
 
     @Test
-    public void testCorrectMaxProfitIsReturned2() {
+    public void testCalculateMaxProfitIsCorrect2() {
         final int[] stockPrices = {5, 7, 10, 2, 9, 4};
         final Stock test = Stock.createStock("Test", stockPrices);
 
@@ -62,7 +62,7 @@ public class StockTest {
     }
 
     @Test
-    public void testCorrectMaxProfitIsReturned3() {
+    public void testCalculateMaxProfitIsCorrect3() {
         final int[] stockPrices = {5, 7, 3, 9, 4, 8};
         final Stock test = Stock.createStock("Test", stockPrices);
 
