@@ -11,19 +11,11 @@ public class StockTest {
     public ExpectedException exception = ExpectedException.none();
 
     @Test
-    public void testNoPrices() {
-        final int[] stockPrices = {};
-        final Stock test = Stock.createStock("Test", stockPrices);
-
-        Assert.assertEquals(0, test.getMaxProfit());
-    }
-
-    @Test
     public void testSinglePrice() {
         final int[] stockPrices = {10};
         final Stock test = Stock.createStock("Test", stockPrices);
 
-        Assert.assertEquals(0, test.getMaxProfit());
+        Assert.assertEquals(0, test.calculateMaxProfit());
     }
 
     @Test
@@ -31,7 +23,7 @@ public class StockTest {
         final int[] stockPrices = {10, 10, 10, 10, 10};
         final Stock test = Stock.createStock("Test", stockPrices);
 
-        Assert.assertEquals(0, test.getMaxProfit());
+        Assert.assertEquals(0, test.calculateMaxProfit());
     }
 
     @Test
@@ -39,7 +31,7 @@ public class StockTest {
         final int[] stockPrices = {10, 8, 7, 5, 3, 1};
         final Stock test = Stock.createStock("Test", stockPrices);
 
-        Assert.assertEquals(0, test.getMaxProfit());
+        Assert.assertEquals(0, test.calculateMaxProfit());
     }
 
     @Test
@@ -48,7 +40,7 @@ public class StockTest {
         final Stock test = Stock.createStock("Test", stockPrices);
 
         // 10 - 1
-        Assert.assertEquals(9, test.getMaxProfit());
+        Assert.assertEquals(9, test.calculateMaxProfit());
     }
 
     @Test
@@ -57,7 +49,7 @@ public class StockTest {
         final Stock test = Stock.createStock("Test", stockPrices);
 
         // 15 - 5
-        Assert.assertEquals(10, test.getMaxProfit());
+        Assert.assertEquals(10, test.calculateMaxProfit());
     }
 
     @Test
@@ -66,7 +58,7 @@ public class StockTest {
         final Stock test = Stock.createStock("Test", stockPrices);
 
         // 9 - 2
-        Assert.assertEquals(7, test.getMaxProfit());
+        Assert.assertEquals(7, test.calculateMaxProfit());
     }
 
     @Test
@@ -75,7 +67,16 @@ public class StockTest {
         final Stock test = Stock.createStock("Test", stockPrices);
 
         // 9 - 3
-        Assert.assertEquals(6, test.getMaxProfit());
+        Assert.assertEquals(6, test.calculateMaxProfit());
+    }
+
+    @Test
+    public void testEmptyStockPricesAreInvalid() {
+        exception.expect(IllegalArgumentException.class);
+        exception.expectMessage("Stock prices must not be empty");
+
+        final int[] stockPrices = {};
+        Stock.createStock("Test", stockPrices);
     }
 
     @Test

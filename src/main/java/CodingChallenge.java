@@ -13,7 +13,7 @@ public class CodingChallenge {
 
             System.out.println("Stock Name: " + myStock.getName());
             System.out.println("Yesterday's Stock Prices: " + Arrays.toString(myStock.getStockPrices()));
-            System.out.println("Max Profit: " + myStock.getMaxProfit());
+            System.out.println("Max Profit: " + myStock.calculateMaxProfit());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
